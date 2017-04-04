@@ -1,7 +1,7 @@
 bl_info = {
     "name": "Ryan's Test Updator",
     "author": "Your Name Here",
-    "version": (1, 0),
+    "version": (1, 0, 1),
     "blender": (2, 75, 0),
     "location": "View3D > Add > Mesh > New Object",
     "description": "Adds a new Mesh Object",
@@ -42,11 +42,11 @@ def add_object(self, context):
 class OBJECT_OT_add_object(Operator, AddObjectHelper):
     """Create a new Mesh Object"""
     bl_idname = "mesh.add_object"
-    bl_label = "Add Mesh Object"
+    bl_label = "Add Ryan's Object"
     bl_options = {'REGISTER', 'UNDO'}
 
     scale = FloatVectorProperty(
-            name="scale",
+            name="Ryan's Scale",
             default=(1.0, 1.0, 1.0),
             subtype='TRANSLATION',
             description="scaling",
@@ -79,56 +79,56 @@ def add_object_manual_map():
 
 # demo bare-bones preferences
 class DemoPreferences(bpy.types.AddonPreferences):
-	bl_idname = __package__
+    bl_idname = __package__
 
-	# addon updater preferences
+    # addon updater preferences
 
-	auto_check_update = bpy.props.BoolProperty(
-		name = "Auto-check for Update",
-		description = "If enabled, auto-check for updates using an interval",
-		default = False,
-		)
-	
-	updater_intrval_months = bpy.props.IntProperty(
-		name='Months',
-		description = "Number of months between checking for updates",
-		default=0,
-		min=0
-		)
-	updater_intrval_days = bpy.props.IntProperty(
-		name='Days',
-		description = "Number of days between checking for updates",
-		default=7,
-		min=0,
-		)
-	updater_intrval_hours = bpy.props.IntProperty(
-		name='Hours',
-		description = "Number of hours between checking for updates",
-		default=0,
-		min=0,
-		max=23
-		)
-	updater_intrval_minutes = bpy.props.IntProperty(
-		name='Minutes',
-		description = "Number of minutes between checking for updates",
-		default=0,
-		min=0,
-		max=59
-		)
+    auto_check_update = bpy.props.BoolProperty(
+        name = "Auto-check for Update",
+        description = "If enabled, auto-check for updates using an interval",
+        default = False,
+        )
+    
+    updater_intrval_months = bpy.props.IntProperty(
+        name='Months',
+        description = "Number of months between checking for updates",
+        default=0,
+        min=0
+        )
+    updater_intrval_days = bpy.props.IntProperty(
+        name='Days',
+        description = "Number of days between checking for updates",
+        default=7,
+        min=0,
+        )
+    updater_intrval_hours = bpy.props.IntProperty(
+        name='Hours',
+        description = "Number of hours between checking for updates",
+        default=0,
+        min=0,
+        max=23
+        )
+    updater_intrval_minutes = bpy.props.IntProperty(
+        name='Minutes',
+        description = "Number of minutes between checking for updates",
+        default=0,
+        min=0,
+        max=59
+        )
 
-	def draw(self, context):
-		
-		layout = self.layout
+    def draw(self, context):
+        
+        layout = self.layout
 
-		# updater draw function
-		addon_updater_ops.update_settings_ui(self,context)
+        # updater draw function
+        addon_updater_ops.update_settings_ui(self,context)
     
     
 
 
 def register():
     addon_updater_ops.register(bl_info)    
-	bpy.utils.register_class(DemoPreferences)
+    bpy.utils.register_class(DemoPreferences)
 
     bpy.utils.register_class(OBJECT_OT_add_object)
     bpy.utils.register_manual_map(add_object_manual_map)
